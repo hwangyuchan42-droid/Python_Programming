@@ -60,10 +60,10 @@ print(result)
 result = {v: k for k, v in result.items()}
 print(result)
 scores = {"국어": 85, "영어": 89, "수학": 100, "과학": 42}
-result = {k: v for k, v in scores.items() if v >= 90}
-print(result)
 
 # 점수 90 이상만 필터링하기
+result = {k: v for k, v in scores.items() if v >= 90}
+print(result)
 
 
 # =========================================================
@@ -73,15 +73,27 @@ print(result)
 # 1️⃣ 바구니에 있는 과일의 단어 개수 세기
 words = ["apple", "banana", "apple", "cherry", "banana", "apple"]
 
+# 클레식 for
+count = {}
+for w in words:
+    count[w] = count.get(w, 0) + 1
+print(count)
 
+# eㅣㄱ셔너리 컴프리헨션
+print({w: words.count(w) for w in words})
 # ✅ {'apple': 3, 'banana': 2, 'cherry': 1}
+
+# 참고로만 알아두기 counter class 딕셔너리 서브클레스
+from collections import Counter
+
+print(Counter(words))
 
 
 # 2️⃣ 60점 이상인 경우 합격 설정하기
 scores = {"국어": 85, "영어": 50, "수학": 100, "과학": 40, "사회": 72}
 
 
-result = {k: '합격' for k, v in scores.items() if v >= 60}
+result = {k: "합격" for k, v in scores.items() if v >= 60}
 print(result)
 
 # ✅ {'국어': '합격', '수학': '합격', '사회': '합격'}
@@ -90,7 +102,7 @@ print(result)
 # 3️⃣ 과목 리스트와 점수 리스트로 딕셔너리 만들기
 subjects = ["국어", "영어", "수학"]
 grades = [90, 80, 100]
-print({k:v for k,v in zip(subjects,grades)})
+print({k: v for k, v in zip(subjects, grades)})
 
 # ✅ {'국어': 90, '영어': 80, '수학': 100}
 
@@ -99,5 +111,20 @@ print({k:v for k,v in zip(subjects,grades)})
 stock = {"연필": 10, "지우개": 5, "노트": 3}  # 기존 재고
 incoming = {"지우개": 4, "노트": 7, "볼펜": 12}  # 입고 내역
 
+# 클레시 포문
+
+for item, qty in incoming.items():
+    stock[item] = stock.get(item, 0) + qty
+print(stock)
+
+# dict
+result = {
+    item: stock.get(item, 0) + incoming.get(item, 0)
+    for item in list(stock) + list(incoming)
+}
+print(result)
+
+stock.update({item: stock.get(item, 0) + qty for item, qty in incoming.items()})
+print(stock)
 
 # ✅ {'연필': 10, '지우개': 9, '노트': 10, '볼펜': 12}
