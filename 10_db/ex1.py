@@ -118,14 +118,14 @@ try:
     student.show_all()
 
 #     # 조회 조건 추가
-#     for row in student.select_by_score(92):
-#         print(row)
+    for row in student.select_by_score(92):
+        print(row)
 
-#     student.update_score("뽀로로", 100)
-#     student.show_all()
+    student.update_score("뽀로로", 100)
+    student.show_all()
 
-#     student.delete("크롱")
-#     student.show_all()
+    student.delete("크롱")
+    student.show_all()
 
 # except sqlite3.Error as e:
 #     print("DB 오류:", e)
